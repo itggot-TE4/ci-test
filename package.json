@@ -1,0 +1,10 @@
+{
+  "name": "jest-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Linus Styrén <linus.styren@ga.ntig.se>",
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^26.5.2"
+  }
+}
