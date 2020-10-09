@@ -4,12 +4,12 @@ module.exports = {
       '@babel/env',
       {
         targets: {
-          node: 'current',
+          node: 'current'
         },
-        useBuiltIns: false,
-      },
+        useBuiltIns: false
+      }
 
-    ],
+    ]
   ],
-  plugins: ["@babel/plugin-syntax-bigint"]
-};
+  plugins: ['@babel/plugin-syntax-bigint']
+}
