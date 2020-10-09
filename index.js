@@ -1,7 +1,3 @@
-function sum(a, b) {
+export const sum = (a, b) => {
 	console.log(a+b);
-}
-
-if (require.main === module) {
-	sum(5, 5);
 }
