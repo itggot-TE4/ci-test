@@ -40,4 +40,16 @@ describe('index.html', () => {
     expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♥2")).toBeTruthy();
   })
 
+  it('has spades 2 <3', () => {
+    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♠2")).toBeTruthy();
+  })
+
+  it('has clubs 2 <3', () => {
+    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♣2")).toBeTruthy();
+  })
+
+  it('has diams 2 <3', () => {
+    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♦2")).toBeTruthy();
+  })
+
 });
