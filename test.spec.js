@@ -17,11 +17,20 @@ describe('index.html', () => {
     // to getting the code in the script tag to execute.
     // This is indeed dangerous and should only be done with trusted content.
     // https://github.com/jsdom/jsdom#executing-scripts
+    const localStorage = {
+        getItem: function (key) {
+            return this[key];
+        },
+        setItem: function (key, value) {
+            this[key] = value;
+        }
+    };
+
     let options = {
         resources: "usable",
         runScripts: 'dangerously',
         cookieJar: new CookieJar(),
-        localStorage: new Storage(),
+        localStorage: localStorage,
         url: new URL("file:" + path.resolve('./index.html')) 
     }
 
