@@ -17,7 +17,7 @@ describe('index.html', () => {
     // to getting the code in the script tag to execute.
     // This is indeed dangerous and should only be done with trusted content.
     // https://github.com/jsdom/jsdom#executing-scripts
-    let url = 'http://host.docker.internal:8000';
+    let url = 'http://serving:8000';
 
     let options = {
         resources: 'usable',
