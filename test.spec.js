@@ -35,20 +35,11 @@ describe('index.html', () => {
   it('no hearts 1', () => {
     expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♥1")).toBeFalsy();
   })
-
-  it('has hearts 2 <3', () => {
-    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♥2")).toBeTruthy();
-  })
-
-  it('has spades 2 <3', () => {
-    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♠2")).toBeTruthy();
-  })
-
-  it('has clubs 2 <3', () => {
+  
+  it('has spades, clubs, hearts and diams 2', () => {
     expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♣2")).toBeTruthy();
-  })
-
-  it('has diams 2 <3', () => {
+    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♠2")).toBeTruthy();
+    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♥2")).toBeTruthy();
     expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♦2")).toBeTruthy();
   })
 
