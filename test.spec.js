@@ -1,17 +1,15 @@
 import { fireEvent, getByText, getByDisplayValue } from '@testing-library/dom'
 import '@testing-library/jest-dom/extend-expect'
 import { JSDOM, VirtualConsole, CookieJar } from 'jsdom'
+import { TestHelper } from './test-helpers.js'
 import fs from 'fs'
 import path from 'path'
 
 //const html = fs.readFileSync(path.resolve(__dirname, './index.html'), 'utf8');
 
+let h
 let dom
 let container
-
-let cardIsPresent = (card) => {
-  return Array.from(container.querySelectorAll('header')).some((node) => node.textContent === card)
-};
 
 describe('index.html', () => {
   beforeEach((done) => {
@@ -27,6 +25,7 @@ describe('index.html', () => {
     JSDOM.fromFile('./index.html', options).then((dom) => {
         setTimeout(() => {
             container = dom.window.document.body
+            h = new TestHelper(container)
             done();
         }, 500);
     })
@@ -37,14 +36,14 @@ describe('index.html', () => {
   })
 
   it('no hearts 1', () => {
-    expect(cardIsPresent("♥1")).toBeFalsy();
+    expect(h.cardIsPresent("♥1")).toBeFalsy();
   })
   
   it('has spades, clubs, hearts and diams 2', () => {
-    expect(cardIsPresent("♣2")).toBeTruthy();
-    expect(cardIsPresent("♠2")).toBeTruthy();
-    expect(cardIsPresent("♥2")).toBeTruthy();
-    expect(cardIsPresent("♦2")).toBeTruthy();
+    expect(h.cardIsPresent("♣2")).toBeTruthy();
+    expect(h.cardIsPresent("♠2")).toBeTruthy();
+    expect(h.cardIsPresent("♥2")).toBeTruthy();
+    expect(h.cardIsPresent("♦2")).toBeTruthy();
   })
 
 });
