@@ -46,4 +46,8 @@ describe('index.html', () => {
     expect(h.cardIsPresent("♦2")).toBeTruthy();
   })
 
+  test('snapshot of main', () => {
+    expect(container.querySelector('main').innerHTML).toMatchSnapshot();
+  })
+
 });
