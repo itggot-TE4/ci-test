@@ -10,8 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "@babel/preset-env": "^7.11.5",
+    "@supabase/doctest-js": "^0.1.0",
     "@testing-library/dom": "^7.24.5",
     "@testing-library/jest-dom": "^5.11.4",
+    "doctest": "^0.17.1",
     "jest": "^26.5.2"
   },
   "devDependencies": {

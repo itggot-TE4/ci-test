@@ -1,36 +1,39 @@
 function generateDeck() {
 
     let suits = ['&hearts;', '&clubs;', '&diams;', '&spades;'];
-    let deck = [];
+    let deck = localStorage.getItem('deck') || [];
 
-    for(let i=0; i < suits.length; i++) {
-        // Yttre loop ( suits )
-        for(let j = 2; j<= 14; j++) {
-            // Inner loop value 
-            let value;
-            if(j < 11)   { value = j.toString() }
-            if(j === 11) { value = 'J' }
-            if(j === 12) { value = 'D' }
-            if(j === 13) { value = 'K' }
-            if(j === 14) { value = 'A' }
-
-            let color = (suits[i] === '&hearts;' || suits[i] === '&diams;' ) ? 'red' : 'black';
-
-            let card = {
-                suite: suits[i],
-                rank: j,
-                value: value,
-                color: color
+    if (deck.length == 0) {
+        for(let i=0; i < suits.length; i++) {
+            // Yttre loop ( suits )
+            for(let j = 2; j<= 14; j++) {
+                // Inner loop value 
+                let value;
+                if(j < 11)   { value = j.toString() }
+                if(j === 11) { value = 'J' }
+                if(j === 12) { value = 'D' }
+                if(j === 13) { value = 'K' }
+                if(j === 14) { value = 'A' }
+    
+                let color = (suits[i] === '&hearts;' || suits[i] === '&diams;' ) ? 'red' : 'black';
+    
+                let card = {
+                    suite: suits[i],
+                    rank: j,
+                    value: value,
+                    color: color
+                }
+    
+                deck.push(card)
             }
-
-            deck.push(card)
         }
+    
+        localStorage.setItem('deck', deck)
     }
 
     return deck
 
 }
-
 
 function updateGUI(deck) {
 
