@@ -32,7 +32,12 @@ describe('index.html', () => {
     expect(container.querySelector('main')).not.toBeNull()
   })
 
-  it('has hearts 1 <3', () => {
+  it('no hearts 1', () => {
+    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♥1")).toBeTruthy();
+  })
+
+  it('has hearts 2 <3', () => {
     expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♥2")).toBeTruthy();
   })
+  
 });
