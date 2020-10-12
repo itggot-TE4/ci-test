@@ -19,7 +19,7 @@ describe('index.html', () => {
     // https://github.com/jsdom/jsdom#executing-scripts
     let dom = new JSDOM(html, { runScripts: "outside-only" });
     let localStorageHack = `
-    window.localStorage = {
+    const _localStorage = {
         getItem: function (key) {
             return this[key];
         },
@@ -33,6 +33,9 @@ describe('index.html', () => {
         elm.innerHTML = \`${localStorageHack}\`;
         return elm;
     }());`);
+    const js = fs.readFileSync(path.resolve(__dirname, html.match(/script.+src="(.+)"/)[1]), 'utf8').replace(/localStorage/g, '_$&');
+    dom.window.eval(`document.body.querySelector('script').removeAttribute('src')`);
+    dom.window.eval(`document.body.querySelector('script').innerHTML = \`${js}\``)
 
     let options = {
         resources: "usable",
