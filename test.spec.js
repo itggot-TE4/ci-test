@@ -33,11 +33,11 @@ describe('index.html', () => {
   })
 
   it('no hearts 1', () => {
-    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♥1")).toBeTruthy();
+    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♥1")).toBeFalsy();
   })
 
   it('has hearts 2 <3', () => {
     expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♥2")).toBeTruthy();
   })
-  
+
 });
