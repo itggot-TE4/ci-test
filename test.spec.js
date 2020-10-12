@@ -9,6 +9,10 @@ import path from 'path'
 let dom
 let container
 
+let cardIsPresent = (card) => {
+  return Array.from(container.querySelectorAll('header')).some((node) => node.textContent === card)
+};
+
 describe('index.html', () => {
   beforeEach((done) => {
     // Constructing a new JSDOM with this option is the key
@@ -33,20 +37,14 @@ describe('index.html', () => {
   })
 
   it('no hearts 1', () => {
-    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♥1")).toBeFalsy();
+    expect(cardIsPresent("♥1")).toBeFalsy();
   })
   
   it('has spades, clubs, hearts and diams 2', () => {
-    let lambda = (card) => {
-      return Array.from(container.querySelectorAll('header')).some((node) => node.textContent === card)
-    };
-
-    // find: Array.from\(.*"(.2)"\)
-    // replace: lambda("$1")
-    expect(lambda("♣2")).toBeTruthy();
-    expect(lambda("♠2")).toBeTruthy();
-    expect(lambda("♥2")).toBeTruthy();
-    expect(lambda("♦2")).toBeTruthy();
+    expect(cardIsPresent("♣2")).toBeTruthy();
+    expect(cardIsPresent("♠2")).toBeTruthy();
+    expect(cardIsPresent("♥2")).toBeTruthy();
+    expect(cardIsPresent("♦2")).toBeTruthy();
   })
 
 });
