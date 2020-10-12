@@ -37,10 +37,16 @@ describe('index.html', () => {
   })
   
   it('has spades, clubs, hearts and diams 2', () => {
-    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♣2")).toBeTruthy();
-    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♠2")).toBeTruthy();
-    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♥2")).toBeTruthy();
-    expect(Array.from(container.querySelectorAll('header')).some((node) => node.textContent === "♦2")).toBeTruthy();
+    let lambda = (card) => {
+      return Array.from(container.querySelectorAll('header')).some((node) => node.textContent === card)
+    };
+
+    // find: Array.from\(.*"(.2)"\)
+    // replace: lambda("$1")
+    expect(lambda("♣2")).toBeTruthy();
+    expect(lambda("♠2")).toBeTruthy();
+    expect(lambda("♥2")).toBeTruthy();
+    expect(lambda("♦2")).toBeTruthy();
   })
 
 });
