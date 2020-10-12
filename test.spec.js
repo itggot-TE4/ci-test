@@ -5,7 +5,7 @@ import { TestHelper } from './test-helpers.js'
 import fs from 'fs'
 import path from 'path'
 
-//const html = fs.readFileSync(path.resolve(__dirname, './index.html'), 'utf8');
+const html = fs.readFileSync(path.resolve(__dirname, './index.html'), 'utf8');
 
 let h
 let dom
@@ -19,16 +19,19 @@ describe('index.html', () => {
     // https://github.com/jsdom/jsdom#executing-scripts
     let options = {
         resources: "usable",
-        runScripts: 'dangerously'
+        runScripts: 'dangerously',
+        cookieJar: new CookieJar(),
+        localStorage: new Storage(),
+        url: new URL("file:" + path.resolve('./index.html')) 
     }
 
-    JSDOM.fromFile('./index.html', options).then((dom) => {
-        setTimeout(() => {
-            container = dom.window.document.body
-            h = new TestHelper(container)
-            done();
-        }, 500);
-    })
+    dom = new JSDOM(html, options);
+
+    setTimeout(() => {
+        container = dom.window.document.body
+        h = new TestHelper(container)
+        done();
+    }, 500);
   })
 
   it('has a main', () => {
