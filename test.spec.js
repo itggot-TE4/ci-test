@@ -17,7 +17,9 @@ describe('index.html', () => {
     // to getting the code in the script tag to execute.
     // This is indeed dangerous and should only be done with trusted content.
     // https://github.com/jsdom/jsdom#executing-scripts
-    const localStorage = {
+    let dom = new JSDOM(html, { runScripts: "outside-only" });
+    let localStorageHack = `
+    window.localStorage = {
         getItem: function (key) {
             return this[key];
         },
@@ -25,16 +27,21 @@ describe('index.html', () => {
             this[key] = value;
         }
     };
+    `;
+    dom.window.eval(`document.head.appendChild(function(){
+        let elm = document.createElement('script');
+        elm.innerHTML = \`${localStorageHack}\`;
+        return elm;
+    }());`);
 
     let options = {
         resources: "usable",
         runScripts: 'dangerously',
         cookieJar: new CookieJar(),
-        localStorage: localStorage,
         url: new URL("file:" + path.resolve('./index.html')) 
     }
 
-    dom = new JSDOM(html, options);
+    dom = new JSDOM(dom.serialize(), options);
 
     setTimeout(() => {
         container = dom.window.document.body
