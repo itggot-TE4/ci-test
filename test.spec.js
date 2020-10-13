@@ -24,6 +24,7 @@ describe('index.html', () => {
         runScripts: 'dangerously'
     }
 
+
     JSDOM.fromURL(url, options).then((dom) => {
         setTimeout(() => {
             container = dom.window.document.body
@@ -46,6 +47,10 @@ describe('index.html', () => {
     expect(h.cardIsPresent("♠2")).toBeTruthy();
     expect(h.cardIsPresent("♥2")).toBeTruthy();
     expect(h.cardIsPresent("♦2")).toBeTruthy();
+  })
+
+  it('has a card', () => {
+    expect(container.querySelector('article')).not.toBeNull();
   })
 
   test('snapshot of main', () => {
