@@ -1,7 +1,7 @@
 function generateDeck() {
 
     let suits = ['&hearts;', '&clubs;', '&diams;', '&spades;'];
-    let deck = localStorage.getItem('docker') || [];
+    let deck = localStorage.getItem('deck') || [];
 
     if (deck.length == 0) {
         for(let i=0; i < suits.length; i++) {
