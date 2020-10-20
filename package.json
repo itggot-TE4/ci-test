@@ -1,22 +1,31 @@
 {
-  "name": "te4",
+  "name": "teacher-o-matic",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "This is a project to enable teachers to easy view and comment on their students code. Using the github api to fetch the teachers repositories and all forks of that repository.",
+  "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "node_modules/.bin/jest .",
+    "test:coverage": "node_modules/.bin/jest . --coverage",
+    "lint": "node_modules/.bin/eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itggot-TE4/Teacher-O-Matic.git"
   },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itggot-TE4/Teacher-O-Matic/issues"
+  },
+  "homepage": "https://github.com/itggot-TE4/Teacher-O-Matic#readme",
   "dependencies": {
-    "@babel/preset-env": "^7.11.5",
-    "@supabase/doctest-js": "^0.1.0",
-    "@testing-library/dom": "^7.24.5",
-    "@testing-library/jest-dom": "^5.11.4",
-    "doctest": "^0.17.1",
-    "jest": "^26.5.2"
+    "express": "^4.17.1",
+    "jest": "^24.9.0",
+    "materialize-css": "^1.0.0",
+    "node-fetch": "^2.6.1",
+    "sqlite": "^4.0.15"
   },
   "devDependencies": {
-    "jest-localstorage-mock": "^2.4.3"
+    "eslint": "^6.5.1"
   }
 }

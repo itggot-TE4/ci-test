@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link type="text/css" rel="stylesheet" href="../css/materialize.css" media="screen,projection">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="../css/main.css">
+    <link type="text/css" rel="stylesheet" href="../css/prettify.css">
+    <script type="text/javascript" src="../js/prettify.js"></script>
+    <script src="https://kit.fontawesome.com/e8c10cdce8.js" crossorigin="anonymous"></script>
+    <title>Teacher-O-Matic</title>
+</head>
+<body>
+    <template id="repo">
+        <div class="card col s6 repo" data-id="">
+            <div class="card-content">
+                <p id="name"></p>
+                <button id="showForks">Show forks |</button>
+                <a href="">Show on Github</a>
+                <p id="forks"></p>
+            </div>
+        </div>
+    </template>
+    <template id="fork">
+        <div class="card col s6 fork" data-id="">
+            <h4 class="fork-title"></h4>
+            <pre class="fork-code"></pre>
+            <a href="">Show on Github</a>
+            <div class="unit-tests"></div>
+            <div class="fork-form">
+                <div id="judge">
+                    <input type="text" placeholder="Comment" style="flex: 1;"></input>
+                    <p>
+                        <label>
+                            <input class="with-gap" type="radio" name="group1" value="1"/>
+                            <span>Klar</span>
+                        </label>
+                        <i class="fas fa-check"></i>
+                    </p>
+                    <p>
+                        <label>
+                            <input class="with-gap" type="radio" name="group1" value="2"/>
+                            <span>Åtgärd krävs</span>
+                        </label>
+                        <i class="fas fa-redo"></i>
+                    </p>
+                    <p>
+                        <label>
+                            <input class="with-gap" type="radio" name="group1" value="3"/>
+                            <span>Ej bedömd</span>
+                        </label>
+                        <i class="fas fa-eye-slash"></i>
+                    </p>
+                    <button class="save btn">Save</button>
+                </div> 
+            </div>
+        </div>
+    </template>
+    <template id="comment">
+        <div class="card fork">
+            <h4 class="fork-title"></h4>
+            <pre class="fork-code"></pre>
+            <a href=""></a>
+            <p class="state"></p>
+            <p class="comment"></p>
+        </div>
+    </template>
+    <nav>
+        <div class="nav-wrapper">
+            <form id="input">
+                <div class="input-field">
+                    <input id="search" type="search" placeholder="Git-user">
+                    <label class="label-icon" for="search"><i class="fab fa-github"></i></label>
+                    <i class="material-icons">close</i>
+                </div>
+            </form>
+            <span id="showUserRepos" title="My repos"><i class="fas fa-user-circle"></i></span>
+            <span id="showComments" title="Show comments"><i  class="fas fa-comment"></i></span>
+        </div>
+    </nav>
+    <span id="welcome" class="container">
+        <h1>Welcome to Teacher-O-Matic!</h1>
+        <h5>Enter your github name in the header field</h5>
+    </span>
+    <section class="container content">
+        <section class="row" id="grid"></section>
+        <section class="row" id="repos"></section>
+    </section>
+</body>
+<script type="text/javascript" src="../js/materialize.js"></script>
+<script type="module" src="../controller/index.js"></script>
+</html>

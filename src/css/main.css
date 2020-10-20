@@ -1,0 +1,110 @@
+.nav-wrapper{
+    display: flex;
+}
+
+.nav-wrapper > form{
+    flex: 1;
+}
+
+.nav-wrapper > span{
+    min-width: 64px;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.nav-wrapper > span:hover{
+    cursor: pointer;
+    border-bottom: .3rem solid white;
+}
+
+button{
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: arial, sans-serif;
+    color: #039be5;
+    cursor: pointer;
+}
+
+button:focus{
+    background: none;
+    border: none;
+}
+
+.passed{
+    color: #00BA51;
+}
+
+.failed{
+    color: #E85851;
+}
+
+#welcome{
+    text-align: center;
+}
+
+.content{
+    padding-top: 100px;
+}
+
+p#forks{
+    display: inline;
+    padding-left: 10px;
+}
+
+.fork{
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 0 !important;
+    padding: 0 !important;
+}
+
+.fork > h4{
+    padding: 5px;
+    text-align: center;
+}
+
+.fork > p.state{
+    font-size: 1.5em;
+    margin-bottom: 0 !important;
+}
+
+.fork > p.comment{
+    font-size: 1.5em;
+}
+
+.fork-code{
+    background-color: #121a1b;
+    width: 100%;
+    padding: 20px;
+}
+
+.unit-tests{
+    margin-right: auto;
+    margin-left: 20px;
+}
+
+.fork-form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+}
+
+.repo{
+    max-width: 300px;
+    margin: 5px;
+}
+
+/* #grid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
