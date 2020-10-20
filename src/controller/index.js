@@ -104,6 +104,9 @@ document.addEventListener("click", async(e) => {
         const repo = await github.repo(repoId);
         const manifest = await github.contents(repo.owner.login, repo.name, ".manifest.json");
         const forks = await github.get(repo.forks_url);
+        console.log(repo);
+        console.log(manifest);
+        console.log(forks);
         showForks(forks, manifest);
     } else if(e.target && e.target.className.includes("save")) {
         e.preventDefault();
@@ -143,7 +146,13 @@ const showForks = (forks, manifestSource) => {
             commentData.push(emptyData);
         }
 
+        console.log(el);
+
+        console.log("i need to find la content");
+
         const contents = await github.contents(el.owner.login, el.name, filePath);
+
+        console.log(contents);
 
         if(contents.message !== "Not Found"){
             const code = atob(contents.content);

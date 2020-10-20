@@ -1,4 +1,4 @@
-import auth from "../config/github.js";
+//import auth from "../config/github.js";
 const url = "https://api.github.com";
 
 export default class github {
@@ -18,7 +18,7 @@ export default class github {
     }
 
     static async userInfo(token){
-        const request = await fetch(`https://api.github.com/user`, {
+        const request = await fetch(`https://api.github.com/user`, { // CR 101
             headers: {
                 "Authorization": `token ${token}`
             }
@@ -28,37 +28,61 @@ export default class github {
     }
 
     static async get(path){
-        const request = await fetch(`${path}${auth}`);
+        const request = await fetch(`${path}`, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        });
         const result = await request.json();
         return result;
     }
 
     static async repos(user){
-        const request = await fetch(`${url}/users/${user}/repos${auth}`);
+        const request = await fetch(`${url}/users/${user}/repos`, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        });
         const result = await request.json();
         return result;
     }
 
     static async repo(id){
-        const request = await fetch(`${url}/repositories/${id}${auth}`);
+        const request = await fetch(`${url}/repositories/${id}`, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        });
         const result = await request.json();
         return result;
     }
 
     static async user(user){
-        const request = await fetch(`${url}/users/${user}${auth}`);
+        const request = await fetch(`${url}/users/${user}`, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        });
         const result = await request.json();
         return result;
     }
 
     static async forks(user, repo){
-        const request = await fetch(`${url}/repos/${user}/${repo}/forks${auth}`);
+        const request = await fetch(`${url}/repos/${user}/${repo}/forks`, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        });
         const result = await request.json();
         return result;
     }
 
     static async contents(user, repo, path){
-        const request = await fetch(`${url}/repos/${user}/${repo}/contents/${path}${auth}`);
+        const request = await fetch(`${url}/repos/${user}/${repo}/contents/${path}`, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+        });
         const result = await request.json();
         return result;
     }
