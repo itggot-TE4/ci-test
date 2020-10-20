@@ -1,15 +1,10 @@
 const fetch = require("node-fetch");
 const express = require("express");
 const bodyParser = require('body-parser');
-const sqlite = require('sqlite');
+const db = require('better-sqlite3')("./src/backend/database/database.sqlite");
 const auth = require("./config/github");
 
 const app = express();
-
-const dbPromise = sqlite.open({
-    filename: './database/database.sqlite',
-    driver: sqlite.Database
- });
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -23,7 +18,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
 app.get("/seed", async(req, res) => {
-    const db = await dbPromise;
     await db.run("DROP TABLE IF EXISTS comments");
     await db.run("CREATE TABLE comments (id INTEGER PRIMARY KEY AUTOINCREMENT, github_uid INTEGER, github_forkId INTEGER, comment TEXT, state TEXT)");
     res.send("Generated database!");
@@ -44,6 +38,9 @@ app.get("/getToken", (req, res) => {
     })
 });
 
+// await db.run\(("[UI].*"),\s+\[(.*)\]
+// db.prepare($1).run($2
+
 app.post("/comments", async(req, res) => {
     const request = await fetch(`https://api.github.com/user`, {
         headers: {
@@ -52,14 +49,13 @@ app.post("/comments", async(req, res) => {
     });
     const result = await request.json();
 
-    const db = await dbPromise;
-    const data = await db.get("SELECT * from comments WHERE github_forkId = ?", [req.body.forkId])
+    const data = db.prepare("SELECT * from comments WHERE github_forkId = ?").get(req.body.forkId)
     console.log(data)
     try{
         if(data !== undefined){
-            await db.run("UPDATE comments SET comment = ?, state = ? WHERE github_forkId = ?;", [req.body.comment, req.body.state, req.body.forkId]);
+            db.prepare("UPDATE comments SET comment = ?, state = ? WHERE github_forkId = ?;").run(req.body.comment, req.body.state, req.body.forkId);
         } else{
-            await db.run("INSERT INTO comments (github_uid, github_forkId, comment, state) VALUES (?, ?, ?, ?);", [result.id, req.body.forkId, req.body.comment, req.body.state]);
+            db.prepare("INSERT INTO comments (github_uid, github_forkId, comment, state) VALUES (?, ?, ?, ?);").run(result.id, req.body.forkId, req.body.comment, req.body.state);
         }
     } catch(e) {
         res.status(500).send(e)
@@ -69,8 +65,7 @@ app.post("/comments", async(req, res) => {
 
 app.get("/comments", async(req, res) => {
     const forkId = req.query.fork;
-    const db = await dbPromise;
-    const result = await db.all("SELECT * from comments WHERE github_forkId = ?", [forkId]);
+    const result = db.prepare("SELECT * from comments WHERE github_forkId = ?").all(forkId);
     res.send(result);
 });
 
