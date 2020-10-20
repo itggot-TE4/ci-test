@@ -100,6 +100,7 @@ const showRepos = async (query, repos) => {
 document.addEventListener("click", async(e) => {
     if(e.target && e.target.id === "showForks"){
         const repoId = e.target.parentElement.parentElement.dataset.id;
+        console.log(repoId);
         const repo = await github.repo(repoId);
         const manifest = await github.contents(repo.owner.login, repo.name, ".manifest.json");
         const forks = await github.get(repo.forks_url);
