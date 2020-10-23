@@ -1,5 +1,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/03622857876b52a719ba/test_coverage)](https://codeclimate.com/github/itggot-TE4/ci-test/test_coverage)
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/03622857876b52a719ba/maintainability)](https://codeclimate.com/github/itggot-TE4/ci-test/maintainability)
+
 # Teacher-O-Matic
 ### Summary
 This is a project to enable teachers to easy view and comment on their students code. Using the github api to fetch the teachers repositories and all forks of that repository. 
