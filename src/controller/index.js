@@ -2,6 +2,7 @@ import github from "../model/github.js";
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     // mock some globals
+    let userInfo = {};
 } else {
     const form = document.querySelector("#input");
     const repoTemplate = document.querySelector("#repo");
@@ -225,7 +226,7 @@ const auth = async() => {
 }
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
-    module.exports = auth();
+    module.exports = auth;
 } else {
     auth();
 }
