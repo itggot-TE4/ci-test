@@ -11,7 +11,7 @@ let h
 let dom
 let container
 
-describe('index.html', () => {
+xdescribe('index.html', () => {
   beforeEach((done) => {
     // Constructing a new JSDOM with this option is the key
     // to getting the code in the script tag to execute.

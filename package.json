@@ -19,6 +19,10 @@
   },
   "homepage": "https://github.com/itggot-TE4/Teacher-O-Matic#readme",
   "dependencies": {
+    "@babel/plugin-syntax-bigint": "^7.8.3",
+    "@babel/preset-env": "^7.12.1",
+    "@testing-library/dom": "^7.26.3",
+    "@testing-library/jest-dom": "^5.11.4",
     "better-sqlite3": "^7.1.1",
     "express": "^4.17.1",
     "jest": "^24.9.0",

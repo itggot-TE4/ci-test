@@ -211,4 +211,9 @@ const auth = async() => {
     }
     userInfo = await github.userInfo(localStorage.getItem("token"));
 }
-auth();
+
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = auth();
+} else {
+    auth();
+}
