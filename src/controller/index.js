@@ -1,29 +1,33 @@
 import github from "../model/github.js";
 
-const form = document.querySelector("#input");
-const repoTemplate = document.querySelector("#repo");
-const forkTemplate = document.querySelector("#fork");
-const commentTemplate = document.querySelector("#comment");
-const grid = document.querySelector("#grid");
-const repoContainer = document.querySelector("#repos")
-const greeting = document.querySelector("#welcome");
-let userInfo = {};
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    // mock some globals
+} else {
+    const form = document.querySelector("#input");
+    const repoTemplate = document.querySelector("#repo");
+    const forkTemplate = document.querySelector("#fork");
+    const commentTemplate = document.querySelector("#comment");
+    const grid = document.querySelector("#grid");
+    const repoContainer = document.querySelector("#repos")
+    const greeting = document.querySelector("#welcome");
+    let userInfo = {};
 
-document.querySelector("#showComments").addEventListener("click", async() => {
-    greeting.innerHTML = "";
-    grid.innerHTML = "";
-    repoContainer.innerHTML = "";
-    const username = userInfo.login;
-    const repos = await github.repos(username);
-    
-    repos.forEach(async(repo) => {
-        const request = await fetch(`http://localhost:4000/comments?fork=${repo.id}`)
-        const comment = await request.json();
-        if(comment.length > 0){
-            appendComment(comment[0], repo);
-        }
+    document.querySelector("#showComments").addEventListener("click", async() => {
+        greeting.innerHTML = "";
+        grid.innerHTML = "";
+        repoContainer.innerHTML = "";
+        const username = userInfo.login;
+        const repos = await github.repos(username);
+        
+        repos.forEach(async(repo) => {
+            const request = await fetch(`http://localhost:4000/comments?fork=${repo.id}`)
+            const comment = await request.json();
+            if(comment.length > 0){
+                appendComment(comment[0], repo);
+            }
+        });
     });
-});
+}
 
 const appendComment = async(comment, repos) => {
     const manifestSource = await github.contents(repos.owner.login, repos.name, ".manifest.json");
@@ -56,19 +60,23 @@ const appendComment = async(comment, repos) => {
     grid.insertAdjacentElement("beforeend", repo);
 }
 
-document.querySelector("#showUserRepos").addEventListener("click", async() => {
-    const username = userInfo.login;
-    const repos = await github.repos(username);
-    showRepos(username, repos);
-});
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    // mock some globals
+} else {
+    document.querySelector("#showUserRepos").addEventListener("click", async() => {
+        const username = userInfo.login;
+        const repos = await github.repos(username);
+        showRepos(username, repos);
+    });
 
 
-form.addEventListener("submit", async(e) => {
-    e.preventDefault();
-    const query = e.target.querySelector("input").value;
-    const repos = await github.repos(query);
-    showRepos(query, repos);
-});
+    form.addEventListener("submit", async(e) => {
+        e.preventDefault();
+        const query = e.target.querySelector("input").value;
+        const repos = await github.repos(query);
+        showRepos(query, repos);
+    });
+}
 
 const showRepos = async (query, repos) => {
     greeting.innerHTML = "";
@@ -95,32 +103,36 @@ const showRepos = async (query, repos) => {
     });
 };
 
-document.addEventListener("click", async(e) => {
-    if(e.target && e.target.id === "showForks"){
-        const repoId = e.target.parentElement.parentElement.dataset.id;
-        const repo = await github.repo(repoId);
-        const manifest = await github.contents(repo.owner.login, repo.name, ".manifest.json");
-        const forks = await github.get(repo.forks_url);
-        showForks(forks, manifest);
-    } else if(e.target && e.target.className.includes("save")) {
-        e.preventDefault();
-        const form = e.target.parentElement;
-        const comment = form.querySelector('input[type="text"]').value;
-        const forkId = form.parentElement.parentElement.dataset.id;
-        const state = form.querySelector(`input[name="${forkId}"]:checked`).value;
-        const data = {
-            comment, state, forkId
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    // mock some globals
+} else {
+    document.addEventListener("click", async(e) => {
+        if(e.target && e.target.id === "showForks"){
+            const repoId = e.target.parentElement.parentElement.dataset.id;
+            const repo = await github.repo(repoId);
+            const manifest = await github.contents(repo.owner.login, repo.name, ".manifest.json");
+            const forks = await github.get(repo.forks_url);
+            showForks(forks, manifest);
+        } else if(e.target && e.target.className.includes("save")) {
+            e.preventDefault();
+            const form = e.target.parentElement;
+            const comment = form.querySelector('input[type="text"]').value;
+            const forkId = form.parentElement.parentElement.dataset.id;
+            const state = form.querySelector(`input[name="${forkId}"]:checked`).value;
+            const data = {
+                comment, state, forkId
+            }
+            fetch("http://localhost:4000/comments", {
+                method: "POST",
+                headers: {
+                    "token": localStorage.getItem("token"),
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            })
         }
-        fetch("http://localhost:4000/comments", {
-            method: "POST",
-            headers: {
-                "token": localStorage.getItem("token"),
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-    }
-});
+    });
+}
 
 const showForks = (forks, manifestSource) => {
     const manifest = JSON.parse(atob(manifestSource.content));

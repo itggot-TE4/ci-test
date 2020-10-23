@@ -31,6 +31,7 @@
     "sqlite": "^4.0.15"
   },
   "devDependencies": {
-    "eslint": "^6.5.1"
+    "eslint": "^6.5.1",
+    "jest-localstorage-mock": "^2.4.3"
   }
 }
