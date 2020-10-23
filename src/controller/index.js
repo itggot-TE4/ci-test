@@ -32,8 +32,6 @@ const appendComment = async(comment, repos) => {
     let repo = document.importNode(commentTemplate.content.cloneNode(true).querySelector("div"), true);
     let state = "";
     const title = repos.full_name;
-    console.log(comment)
-    console.log(repos)
     switch(parseInt(comment.state)){
         case 1:
             state = `<i class="fas fa-check"></i> Klar`
@@ -100,13 +98,9 @@ const showRepos = async (query, repos) => {
 document.addEventListener("click", async(e) => {
     if(e.target && e.target.id === "showForks"){
         const repoId = e.target.parentElement.parentElement.dataset.id;
-        console.log(repoId);
         const repo = await github.repo(repoId);
         const manifest = await github.contents(repo.owner.login, repo.name, ".manifest.json");
         const forks = await github.get(repo.forks_url);
-        console.log(repo);
-        console.log(manifest);
-        console.log(forks);
         showForks(forks, manifest);
     } else if(e.target && e.target.className.includes("save")) {
         e.preventDefault();
@@ -146,13 +140,7 @@ const showForks = (forks, manifestSource) => {
             commentData.push(emptyData);
         }
 
-        console.log(el);
-
-        console.log("i need to find la content");
-
         const contents = await github.contents(el.owner.login, el.name, filePath);
-
-        console.log(contents);
 
         if(contents.message !== "Not Found"){
             const code = atob(contents.content);
@@ -186,8 +174,6 @@ const showForks = (forks, manifestSource) => {
                 button.disabled = true;
                 button.style.backgroundColor = "grey";
             }
-
-            console.log(el);
             
             fork.style.width = "500px"
             fork.querySelector(".fork-title").innerHTML = `${el.owner.login}/${el.name}`;

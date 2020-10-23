@@ -4,12 +4,10 @@ const url = "https://api.github.com";
 export default class github {
     static async auth(){
         const url = "https://github.com/login/oauth/authorize?client_id=bae0be1309c40444a180";
-        console.log(url);
         window.location = url;
     }
 
     static async getToken(code){
-        console.log(code);
         const request = await fetch(`http://localhost:4000/getToken?code=${code}`);
         const result = await request.text();
         const resultUrl = new URLSearchParams(result);

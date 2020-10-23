@@ -27,11 +27,9 @@ app.get("/getToken", (req, res) => {
     const code = req.query.code;
     fetch(`https://github.com/login/oauth/access_token${auth}&code=${code}`, { method: 'POST' })
     .then(result => {
-        console.log(result);
         return result.text()
     }) // expecting a json response
     .then(text => {
-        console.log(text);
         res.send(text)
     }).catch(err => {
         console.error(err);
@@ -50,7 +48,7 @@ app.post("/comments", async(req, res) => {
     const result = await request.json();
 
     const data = db.prepare("SELECT * from comments WHERE github_forkId = ?").get(req.body.forkId)
-    console.log(data)
+    //console.log(data)
     try{
         if(data !== undefined){
             db.prepare("UPDATE comments SET comment = ?, state = ? WHERE github_forkId = ?;").run(req.body.comment, req.body.state, req.body.forkId);
