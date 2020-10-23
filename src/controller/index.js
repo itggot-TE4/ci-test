@@ -2,16 +2,16 @@ import github from "../model/github.js";
 
 if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     // mock some globals
-    let userInfo = {};
+    var userInfo = {};
 } else {
-    const form = document.querySelector("#input");
-    const repoTemplate = document.querySelector("#repo");
-    const forkTemplate = document.querySelector("#fork");
-    const commentTemplate = document.querySelector("#comment");
-    const grid = document.querySelector("#grid");
-    const repoContainer = document.querySelector("#repos")
-    const greeting = document.querySelector("#welcome");
-    let userInfo = {};
+    var form = document.querySelector("#input");
+    var repoTemplate = document.querySelector("#repo");
+    var forkTemplate = document.querySelector("#fork");
+    var commentTemplate = document.querySelector("#comment");
+    var grid = document.querySelector("#grid");
+    var repoContainer = document.querySelector("#repos")
+    var greeting = document.querySelector("#welcome");
+    var userInfo = {};
 
     document.querySelector("#showComments").addEventListener("click", async() => {
         greeting.innerHTML = "";

@@ -1,3 +1,4 @@
 node_modules
 src/config/github.js
 src/backend/config/github.js
+coverage
