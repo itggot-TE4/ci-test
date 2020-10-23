@@ -13,7 +13,7 @@ jobs:
       run: |
         echo Generate report
         npm install
-        #node_modules/.bin/jest . --coverage
+        node_modules/.bin/jest . --coverage
     - name: Generate formatted coverage for codeclimate
       run: |
         echo Fetch testreporter tool
